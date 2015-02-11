@@ -1,0 +1,25 @@
+local _M = { }
+
+function _M.scene(drv)
+    local rgb = drv.rgb
+    local solid = drv.solid
+    local circle = drv.circle
+    local fill = drv.fill
+    local rgbcircle = function(cx,cy,r,red,green,blue)
+        return fill(circle(cx,cy,r),solid(rgb(red,green,blue)))
+    end
+    local s = {
+        rgbcircle(100,100,100, 1,0,0),
+    }
+	return drv.scene(s)
+end
+
+function _M.window(drv)
+	return drv.window(0,0,200,200)
+end
+
+function _M.viewport(drv)
+	return drv.viewport(0,0,200,200)
+end
+
+return _M

@@ -1,0 +1,49 @@
+triangle.rvg
+ preprocess in 0.000s
+ rendering in 0.064s
+
+circler.rvg
+ preprocess in 0.000s
+ rendering in 0.075s
+
+polygon.rvg
+ preprocess in 0.000s
+ rendering in 0.827s
+
+eopolygon.rvg
+ preprocess in 0.000s
+ rendering in 0.831s
+
+circler.rvg
+ preprocess in 0.000s
+ rendering in 0.064s
+
+transparency.rvg
+ preprocess in 0.000s
+ rendering in 0.042s
+
+lion.rvg
+ preprocess in 0.008s
+ rendering in 26.673s
+
+bunny.rvg
+ preprocess in 0.047s
+ rendering in 313.067s
+
+leopard.rvg
+ preprocess in 0.117s
+ rendering in 320.872s
+
+lineargradient.rvg
+ preprocess in 0.000s
+ rendering in 0.206s
+
+radialgradient.rvg
+ dont implement
+
+xformedlineargradient.rvg
+ preprocess in 0.000s
+ rendering in 0.142s
+ 
+xformedradialgradient.rvg
+ dont implement

@@ -1,0 +1,82 @@
+2D Computer Graphics
+2015.0
+
+Second assignment: Drawing ellipses, triangles, and polygons.
+-----------------------------------
+
+Now that we understand the RVG format, we will generate our
+first images from vector graphics illustrations.
+
+To simplify the task, we provide a "skeleton" driver
+"render.lua" that invokes two functions you have to
+implement yourselves: "preparescene", and "sample".
+Naturally, as you organize your code, these functions may
+invoke other functions you implemented.
+
+We took care of allocating an image with dimensions from the
+viewport, computing the center of each pixel, invoking your
+"sample" function on the scene, saving the results in each
+image pixel, and saving the image to disk.
+
+Recall the "process.lua" already transforms the scene so
+that the scene.xf maps all points from illustration
+coordinates to pixel coordinates.  You have to make sure
+your "preparescene" traverses the shapes and the paints in
+the scene performing the actual transformations (You can
+also add precomputed data to the scene to help your sample
+function compute colors.) Then, write your "sample" function
+so it can return the color at any pixel coordinate pair.
+
+For example, running your modified "render.lua" on an input
+as such
+
+    lua process.lua render.lua input.rvg output.png
+
+should result in a color image "output.png" being created
+with an image of the corresponding "input.rvg".
+
+We have updated the samples archive with a new directory
+containing images for each SVG. These images were generated
+with our own implementation of this assignment.
+
+Proceed in the following order.
+
+Start by getting the simple files to work
+
+    triangle.rvg
+    circle.rvg
+    polygon.rvg
+    eopolygon.rvg
+    transparency.rvg
+    icozahedron.rvg
+
+The inside-outside test for circles, triangles, and polygons
+has been covered in class. Take a look at the Mathematica
+files if you have any doubts. We also covered transparency
+in class. There is bibliography for all these topics.
+
+As soon as you are done, these larger files should also work
+
+    lion.rvg
+    bunny.rvg
+    leopard.rvg
+
+These should take a *significant* amount of time to render.
+We will work on speeding up their computation in later
+assignments.
+
+You can now work on rendering color gradients. These have
+recently been covered in class and there is bibliography for
+them as well.
+
+    lineargradient.rvg
+    radialgradient.rvg
+
+Finally, make sure the transformed gradients also work
+
+    xformedlineargradient.rvg
+    xformedradialgradient.rvg
+
+The remaining input files contain paths. We will learn about
+them in the following classes. Please don't worry about them
+for now.

@@ -1,0 +1,23 @@
+local _M = { width=512, height=512 }
+
+function _M.scene(drv)
+    local rgb = drv.rgb
+    local solid = drv.solid
+    local polygon = drv.polygon
+    local eofill = drv.eofill
+    local s = {
+	    eofill(polygon{512, 256, 177, 499, 49, 106, 463, 106, 335, 499, 0, 256, 335, 13, 463, 406, 49, 406, 177, 13},
+	        solid(rgb(1, 0, 0))),
+    }
+	return drv.scene(s)
+end
+
+function _M.window(drv)
+	return drv.window(0, 0, _M.width, _M.height)
+end
+
+function _M.viewport(drv)
+	return drv.viewport(0, 0, _M.width, _M.height)
+end
+
+return _M

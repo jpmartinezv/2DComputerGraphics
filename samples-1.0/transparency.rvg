@@ -1,0 +1,29 @@
+local _M = { }
+
+function _M.scene(drv)
+    local rgba8 = drv.rgba8
+    local solid = drv.solid
+    local circle = drv.circle
+    local fill = drv.fill
+    local rgbacircle = function(cx,cy,radius,r,g,b,a)
+        return fill(circle(cx,cy,radius),solid(rgba8(r,g,b,a)))
+    end
+    local s = {
+        rgbacircle(25, 25, 20, 128, 0, 128, 255),
+        rgbacircle(50, 25, 20, 0, 0, 255, 192),
+        rgbacircle(75, 25, 20, 0, 255, 0, 128),
+        rgbacircle(100, 25, 20, 255, 255, 0, 64),
+        rgbacircle(125, 25, 20, 255, 0, 0, 32),
+    }
+	return drv.scene(s)
+end
+
+function _M.window(drv)
+	return drv.window(0,0,150,50)
+end
+
+function _M.viewport(drv)
+	return drv.viewport(0,0,150,50)
+end
+
+return _M

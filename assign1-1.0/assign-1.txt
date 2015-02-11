@@ -1,0 +1,96 @@
+2D Computer Graphics
+2015.0
+
+First assignment: Writing SVG files
+-----------------------------------
+
+This assignment has two important goals.  The first is
+making sure all students understand the RVG representation
+of vector graphics used in our Lua framework (Note that RVG
+is not the same as SVG.) Obviously, this is an vital
+requirement for future assignments.  The second is making
+sure all students know how to output vector graphics in a
+format that can be easily inspected and edited by
+third-party software. This will be a valuable as a debugging
+tool in future assignments. This is why we chose SVG.
+
+To simplify the task, we are providing a driver that loads
+up an RVG file and outputs a new RVG file containing the
+same information. As an example, to run the RVG driver on
+the "lion.rvg" file and dump the contents to the terminal,
+use the command line
+
+    lua process.lua rvg.lua lion.rvg
+
+Instead, to save the results to a file named
+"rewritten.rvg", use the command line
+
+    lua process.lua rvg.lua lion.rvg rewritten.rvg
+
+You can modify the rvg.lua file, or create a new file from
+scratch to output SVG files using the same command line.
+Please name your file svg.lua.
+
+As an example, to produce an SVG for the "lion.rvg", we will
+run your program as
+
+    lua process.lua svg.lua lion.rvg rewritten.svg
+
+We will then open rewritten.svg with Inkscape and inspect
+it. The SVG files we have provided you with were produced
+with our own implementation of this assignment. You can use
+them as reference, but you don't need to generate identical
+files.
+
+However, Inkscape must properly understand your files.
+
+Your code should be able to produce SVG files for all
+samples we provide (Please ignore the file "texture.rvg" for
+now.)
+
+Proceed in the following order.
+
+Start by getting the simple files to work
+
+    triangle.rvg
+    circle.rvg
+    polygon.rvg
+    eopolygon.rvg
+    transparency.rvg
+
+As soon as you are done, these larger files should also work
+
+    icozahedron.rvg
+    lion.rvg
+    bunny.rvg
+    leopard.rvg
+
+Then add support for curved outlines. The ttf file has
+quadratic curves, and the type1 has cubic.
+
+    hello-ttf.rvg
+    hello-type1.rvg
+
+Now these larger files should work
+
+    page.rvg
+    dancer.rvg
+
+Finally, add linear and radial gradients
+
+    lineargradient.rvg
+    radialgradient.rvg
+
+The final example should now work
+
+    drops.rvg
+
+PS:
+
+Be careful with transformations. In SVG, the transformation
+associated to a path is applied over and *in addition* to
+the transformation associated to a gradient. Check these
+examples
+
+    xformedlineargradient.rvg
+    xformedradialgradient.rvg

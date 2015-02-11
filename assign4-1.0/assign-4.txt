@@ -1,0 +1,118 @@
+2D Computer Graphics
+2015.0
+
+Fourth assignment: Rendering with acceleration
+-----------------------------------
+
+In this assignment, we will use a quadtree to accelerate the
+rendering of input files.
+
+As in other assignments, we provide the "skeleton" driver
+"render.lua" that invokes functions you will have to
+implement yourself. Naturally, as you organize your code,
+these functions may invoke other functions you implemented.
+You can most of the work you did for the third assignment,
+particularly the inside-outside test for paths and the
+evaluation of color gradients.
+
+To simplify your task, we are providing some functions that
+we used in our own implementation. The most important are
+the function that transform paths to pixel coordinates, the
+function that cuts a rational quadratic Bezier segment, and
+the function that finds the root of rational quadratic
+Bezier polynomial, and the function that converts circles to
+paths. You can use these functions or you can do everything
+on your own: it is up to you.
+
+One major change is that process.lua now accepts command
+line switches. For example,
+
+    lua process.lua -width:1024 render.lua lion.rvg lion.png
+
+will set the width of the output image to 1024 and the
+set the height proportionally.
+
+At the moment, only -width and -height switches are supported.
+Unrecognized switches are passed down to the render()
+function you will implement.
+
+In the skeleton implementation, you will see that the
+render() function already recognizes two switches, -maxdepth
+and -scenetree
+
+    lua process.lua -width:1024 -maxdepth:5 render.lua lion.rvg lion.png
+
+will set the maximum subdivision depth to 5, whereas
+
+    lua process.lua -width:1024 -maxdepth:5 -scenetree lion.rvg lion.svg
+
+will invoke dumpscenetree() and then exits instead of
+rendering an image. You will have to implement
+dumpscenetree() yourself.
+
+You can modify the render() function to understand whatever
+additional command-line switches you like, but it must
+understand and honor the ones we already specified.
+
+Proceed in the following order with the assignment.
+
+Start by defining your quadtree node. I strongly
+suggest that you use a scene as a leaf, and an internal node
+that contains the 4 child nodes.
+
+Then implement the dumpscenetree() function so you can use
+it for debugging throughout. You should use your own
+implementation of the svg driver dump SVG files.
+
+Now implement functions that override triangle() and
+polygon() and return paths instead.
+
+Check that this works using your dumpscenetree() function
+and the -scenetree command-line switch.
+
+Move on to segment monotonization. Implement a little table
+with methods for each instruction, and chain it with the
+path transformation code we are providing.
+
+Check that this works using your dumpscenetree() function
+and the -scenetree command-line switch. Open the files on
+Inkscape and see that really all segments are monotonic.
+
+Then implement the function that takes the entire scene and
+splits it at a given vertical x=c or horizontal y=c line.
+Keep in mind that you can write code in a way that you can
+chain these clipping operation together.
+
+Start with path containing only linear segments. Then add
+examples that contain quadratic segments. Then cubic
+segments. Finally rational quadratic segments.
+
+Check that this works using your dumpscenetree() function
+and the -scenetree command-line switch.
+
+After you are convinced your clipping code is working, write
+the scenetoleaf() function, and then the subdividescene()
+recursive function.
+
+We are providing a trees/ directory with the results of our
+implementation of -scenetree with increasing -maxdepth.
+Your quadtree does not have to look exactly like ours. For
+example, you may decide that a leaf is already simple enough
+and does not merit further subdivision. But your quadtree
+does have to adapt to the input.
+
+When you are convinced your quadtree is correct, write the
+sample() function.
+
+Since the leaf is a scene, you should be able to reuse your
+rendering code from assignment 3 after finding the leaf that
+contains the sample.
+
+We are providing new pngs/ with the results of our
+implementation. We are also providing a file
+assign-4-times.txt with the timings for our implementation.
+This is just so you have an idea of what is reasonable.
+
+You can finally render the page.rvg file!
+
+Good luck!

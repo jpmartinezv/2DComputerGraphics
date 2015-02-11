@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<svg
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 200 200">
+<defs>
+<radialGradient id="radial1" gradientUnits="userSpaceOnUse" cx="100" cy="100" fx="150" fy="100" r="100" spreadMethod="pad">
+<stop offset="0" stop-color="rgb(255,0,0)" stop-opacity="1"/>
+<stop offset="1" stop-color="rgb(0,255,0)" stop-opacity="1"/>
+</radialGradient>
+</defs>
+<g transform="translate(0, 200) scale(1, -1)">
+<circle id="p1" fill="url(#radial1)" transform="matrix(0.707107, 0.707107, -0.353553, 0.353553, 64.6447, -6.06602)" cx="100" cy="100" r="100"/>
+</g>
+</svg>

@@ -1,0 +1,31 @@
+_M = {}
+
+function _M.scene(drv)
+    local rgbx = drv.rgbx
+    local solid = drv.solid
+    local triangle = drv.triangle
+    local fill = drv.fill
+    local s = {
+        fill(triangle(1,-63,87,-183,30,-138), solid(rgbx("ccfaa7"))),
+        fill(triangle(87,56,1,-63,30,10), solid(rgbx("c96232"))),
+        fill(triangle(228,10,87,56,170,56), solid(rgbx("533"))),
+        fill(triangle(228,-137,228,10,255,-63), solid(rgbx("38385f"))),
+        fill(triangle(228,10,124,-63,87,56), solid(rgbx("8f364f"))),
+        fill(triangle(124,-63,228,10,228,-137), solid(rgbx("554dae"))),
+        fill(triangle(124,-63,1,-63,87,56), solid(rgbx("fba56d"))),
+        fill(triangle(87,-183,1,-63,124,-63), solid(rgbx("fefee1"))),
+        fill(triangle(87,-183,124,-63,228,-137), solid(rgbx("98d0ff"))),
+        fill(triangle(168,-183,87,-183,228,-137), solid(rgbx("329fe7")))
+    }
+    return drv.scene(s):translate(0,192)
+end
+
+function _M.window(drv)
+    return drv.window(0,0,256,256)
+end
+
+function _M.viewport(drv)
+    return drv.viewport(0,0,256,256)
+end
+
+return _M

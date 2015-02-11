@@ -1,0 +1,39 @@
+<?xml version="1.0" standalone="no"?>
+<svg
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 512 512">
+<defs>
+</defs>
+<g transform="translate(0, 512) scale(1, -1)">
+<path id="p1" fill="rgb(204,250,167)" d="M 2 258 L 174 18 60 108 2 258 Z "/>
+<path id="p2" fill="rgb(201,97,50)" d="M 174 496 L 2 258 60 404 174 496 Z "/>
+<path id="p3" fill="rgb(85,51,51)" d="M 456 404 L 174 496 340 496 456 404 Z "/>
+<path id="p4" fill="rgb(56,56,95)" d="M 456 110 L 456 404 510 258 456 110 Z "/>
+<path id="p5" fill="rgb(143,54,79)" d="M 456 404 L 248 258 174 496 456 404 Z "/>
+<path id="p6" fill="rgb(85,77,174)" d="M 248 258 L 456 404 456 110 248 258 Z "/>
+<path id="p7" fill="rgb(251,165,109)" d="M 248 258 L 2 258 174 496 248 258 Z "/>
+<path id="p8" fill="rgb(254,254,225)" d="M 174 18 L 2 258 248 258 174 18 Z "/>
+<path id="p9" fill="rgb(152,208,255)" d="M 174 18 L 248 258 456 110 174 18 Z "/>
+<path id="p10" fill="rgb(50,159,231)" d="M 336 18 L 174 18 456 110 336 18 Z "/>
+<path id="p11" fill="rgb(0,0,255)" d="M 0 -0.25 L 512 -0.25 512 0.25 0 0.25 Z "/>
+<path id="p12" fill="rgb(0,0,255)" d="M 0 511.75 L 512 511.75 512 512.25 0 512.25 Z "/>
+<path id="p13" fill="rgb(0,0,255)" d="M -0.25 0 L -0.25 512 0.25 512 0.25 0 Z "/>
+<path id="p14" fill="rgb(0,0,255)" d="M 511.75 0 L 511.75 512 512.25 512 512.25 0 Z "/>
+<path id="p15" fill="rgb(0,0,255)" d="M 0 255.75 L 512 255.75 512 256.25 0 256.25 Z "/>
+<path id="p16" fill="rgb(0,0,255)" d="M 255.75 0 L 255.75 512 256.25 512 256.25 0 Z "/>
+<path id="p17" fill="rgb(0,0,255)" d="M 0 127.75 L 256 127.75 256 128.25 0 128.25 Z "/>
+<path id="p18" fill="rgb(0,0,255)" d="M 127.75 0 L 127.75 256 128.25 256 128.25 0 Z "/>
+<path id="p19" fill="rgb(0,0,255)" d="M 256 127.75 L 512 127.75 512 128.25 256 128.25 Z "/>
+<path id="p20" fill="rgb(0,0,255)" d="M 383.75 0 L 383.75 256 384.25 256 384.25 0 Z "/>
+<path id="p21" fill="rgb(0,0,255)" d="M 0 383.75 L 256 383.75 256 384.25 0 384.25 Z "/>
+<path id="p22" fill="rgb(0,0,255)" d="M 127.75 256 L 127.75 512 128.25 512 128.25 256 Z "/>
+<path id="p23" fill="rgb(0,0,255)" d="M 256 383.75 L 512 383.75 512 384.25 256 384.25 Z "/>
+<path id="p24" fill="rgb(0,0,255)" d="M 383.75 256 L 383.75 512 384.25 512 384.25 256 Z "/>
+</g>
+</svg>

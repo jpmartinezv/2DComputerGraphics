@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="no"?>
+<svg
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 512 512">
+<defs>
+<radialGradient id="radial1" gradientUnits="userSpaceOnUse" cx="100" cy="100" fx="150" fy="100" r="100" spreadMethod="pad" gradientTransform="matrix(0.707107, 0.707107, -0.353553, 0.353553, 64.6447, -6.06602)">
+<stop offset="0" stop-color="rgb(255,0,0)" stop-opacity="1"/>
+<stop offset="1" stop-color="rgb(0,255,0)" stop-opacity="1"/>
+</radialGradient>
+</defs>
+<g transform="translate(0, 512) scale(1, -1)">
+<path id="p1" fill="url(#radial1)" d="M 165.490688 346.5095168 A 256.00007921762 127.99985859013 45 0 1 53.614480365297 134.56830024123 256.00007921762 127.99985859013 45 0 1 134.56860744123 53.614173165297 256.00007921757 127.99985859013 -135 0 1 144.48764795119 53.97777275119 256.00007921762 127.99985859013 45 0 1 458.02243204881 367.51255684881 256.00007921759 127.99985859014 -135.00000000001 0 1 458.3860316347 377.43159735877 256.00007921762 127.99985859013 45 0 1 377.43190455877 458.3857244347 256.00007921762 127.99985859013 45 0 1 165.490688 346.5095168 Z "/>
+<path id="p2" fill="rgb(0,0,255)" d="M 0 -0.25 L 512 -0.25 512 0.25 0 0.25 Z "/>
+<path id="p3" fill="rgb(0,0,255)" d="M 0 511.75 L 512 511.75 512 512.25 0 512.25 Z "/>
+<path id="p4" fill="rgb(0,0,255)" d="M -0.25 0 L -0.25 512 0.25 512 0.25 0 Z "/>
+<path id="p5" fill="rgb(0,0,255)" d="M 511.75 0 L 511.75 512 512.25 512 512.25 0 Z "/>
+</g>
+</svg>

@@ -1,0 +1,21 @@
+local _M = { }
+
+function _M.scene(drv)
+    local _ENV = drv
+    local s = {
+        fill(path{M, 0, 0, 200, 0, 200, 200, 0, 200},
+            lineargradient(ramp{spread=spread.clamp; 0,rgb(1,0,0),1,rgb(0,1,0)},
+                p2(0,0), p2(200,200)))
+    }
+	return scene(s)
+end
+
+function _M.window(drv)
+	return drv.window(0,0,200,200)
+end
+
+function _M.viewport(drv)
+	return drv.viewport(0,0,200,200)
+end
+
+return _M

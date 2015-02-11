@@ -1,0 +1,57 @@
+examples/bunny.rvg
+  preprocess in 2.371s
+  rendering in 2.169s
+examples/circle.rvg
+  preprocess in 0.000s
+  rendering in 0.831s
+examples/dancer.rvg
+  preprocess in 0.550s
+  rendering in 0.925s
+examples/drops.rvg
+  preprocess in 1.648s
+  rendering in 8.240s
+examples/eopolygon.rvg
+  preprocess in 0.000s
+  rendering in 3.314s
+examples/hello-ttf.rvg
+  preprocess in 0.023s
+  rendering in 0.278s
+examples/hello-type1.rvg
+  preprocess in 0.022s
+  rendering in 0.296s
+examples/icozahedron.rvg
+  preprocess in 0.032s
+  rendering in 0.751s
+examples/leopard.rvg
+  preprocess in 2.119s
+  rendering in 3.031s
+examples/lineargradient.rvg
+  preprocess in 0.000s
+  rendering in 0.343s
+examples/lion.rvg
+  preprocess in 0.942s
+  rendering in 1.345s
+examples/page.rvg
+  preprocess in 3.885s
+  rendering in 14.249s
+examples/polygon.rvg
+  preprocess in 0.000s
+  rendering in 3.292s
+examples/radialgradient.rvg
+  preprocess in 0.000s
+  rendering in 0.885s
+examples/texture.rvg
+  preprocess in 0.000s
+  rendering in 2.979s
+examples/transparency.rvg
+  preprocess in 0.007s
+  rendering in 0.146s
+examples/triangle.rvg
+  preprocess in 0.000s
+  rendering in 0.240s
+examples/xformedlineargradient.rvg
+  preprocess in 0.000s
+  rendering in 0.315s
+examples/xformedradialgradient.rvg
+  preprocess in 0.000s
+  rendering in 0.798s

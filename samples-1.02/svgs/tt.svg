@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<svg
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 150 50">
+<defs>
+</defs>
+<g transform="translate(0, 50) scale(1, -1)">
+<circle id="p1" fill="rgb(128,0,128)" cx="25" cy="25" r="20"/>
+<circle id="p3" fill="rgb(0,255,0)" fill-opacity="0.501961" cx="75" cy="25" r="20"/>
+<circle id="p2" fill="rgb(0,0,255)" fill-opacity="0.752941" cx="50" cy="25" r="20"/>
+<circle id="p4" fill="rgb(255,255,0)" fill-opacity="0.25098" cx="100" cy="25" r="20"/>
+<circle id="p5" fill="rgb(255,0,0)" fill-opacity="0.12549" cx="125" cy="25" r="20"/>
+</g>
+</svg>

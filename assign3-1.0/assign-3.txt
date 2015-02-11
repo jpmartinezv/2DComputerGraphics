@@ -1,0 +1,65 @@
+2D Computer Graphics
+2015.0
+
+Third assignment: Paths with curved segments and gradient paints.
+-----------------------------------
+
+Now that we can draw polygons and ellipses, we move to the
+most common vector graphics primitive: paths with curved
+segments.
+
+To simplify the task, we provide the "skeleton" driver
+"render.lua" that invokes two functions you have to
+implement yourselves: "preparescene", and "sample".
+Naturally, as you organize your code, these functions may
+invoke other functions you implemented. You can reuse all
+the work you did for the second assignment, and try to
+improve.
+
+We are also providing a new version of rvg.lua that contains
+some sample code showcasing the new iterator syntax for path
+content. Read the code and maybe you will find something
+useful.
+
+Proceed in the following order with the assignment.
+
+Start by getting linear and quadratic segments to work.
+Test them with the file
+
+    hello-ttf.rvg
+
+Then add cubics, and test them with the file
+
+    hello-type1.rvg
+
+Remember that we are providing the modules quadratic.lua and
+cubic.lua that can be used to solve quadratic and cubic
+equations.
+
+If you have not finished gradient paints yet, now is the
+time to work on them. These have recently been covered in
+class and there is bibliography for them as well.
+
+    lineargradient.rvg
+    radialgradient.rvg
+
+Finally, make sure the transformed gradients also work
+
+    xformedlineargradient.rvg
+    xformedradialgradient.rvg
+
+Now you can render one of the prettiest images in the
+sample set
+
+    drops.rvg
+
+In theory, you should also be able to render the
+
+    page.rvg
+
+file, but using the current algorithm it will probably take
+too long to render.
+
+We will learn about acceleration datastructures soon.
+
+Good luck!

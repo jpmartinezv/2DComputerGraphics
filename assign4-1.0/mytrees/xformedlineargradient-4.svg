@@ -1,0 +1,50 @@
+<?xml version="1.0" standalone="no"?>
+<svg
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 512 512">
+<defs>
+<linearGradient id="linear1" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="200" y2="200" spreadMethod="pad" gradientTransform="matrix(0.499995, 0.499995, -0.499995, 0.499995, 100, 0.000959005)">
+<stop offset="0" stop-color="rgb(255,0,0)" stop-opacity="1"/>
+<stop offset="1" stop-color="rgb(0,255,0)" stop-opacity="1"/>
+</linearGradient>
+</defs>
+<g transform="translate(0, 512) scale(1, -1)">
+<path id="p1" fill="url(#linear1)" d="M 256 0.0024550528 L 511.99744 255.9998950528 256 511.9973350528 0.0025599999999883 255.9998950528 256 0.0024550528 Z "/>
+<path id="p2" fill="rgb(0,0,255)" d="M 0 -0.25 L 512 -0.25 512 0.25 0 0.25 Z "/>
+<path id="p3" fill="rgb(0,0,255)" d="M 0 511.75 L 512 511.75 512 512.25 0 512.25 Z "/>
+<path id="p4" fill="rgb(0,0,255)" d="M -0.25 0 L -0.25 512 0.25 512 0.25 0 Z "/>
+<path id="p5" fill="rgb(0,0,255)" d="M 511.75 0 L 511.75 512 512.25 512 512.25 0 Z "/>
+<path id="p6" fill="rgb(0,0,255)" d="M 0 255.75 L 512 255.75 512 256.25 0 256.25 Z "/>
+<path id="p7" fill="rgb(0,0,255)" d="M 255.75 0 L 255.75 512 256.25 512 256.25 0 Z "/>
+<path id="p8" fill="rgb(0,0,255)" d="M 0 127.75 L 256 127.75 256 128.25 0 128.25 Z "/>
+<path id="p9" fill="rgb(0,0,255)" d="M 127.75 0 L 127.75 256 128.25 256 128.25 0 Z "/>
+<path id="p10" fill="rgb(0,0,255)" d="M 128 63.75 L 256 63.75 256 64.25 128 64.25 Z "/>
+<path id="p11" fill="rgb(0,0,255)" d="M 191.75 0 L 191.75 128 192.25 128 192.25 0 Z "/>
+<path id="p12" fill="rgb(0,0,255)" d="M 0 191.75 L 128 191.75 128 192.25 0 192.25 Z "/>
+<path id="p13" fill="rgb(0,0,255)" d="M 63.75 128 L 63.75 256 64.25 256 64.25 128 Z "/>
+<path id="p14" fill="rgb(0,0,255)" d="M 256 127.75 L 512 127.75 512 128.25 256 128.25 Z "/>
+<path id="p15" fill="rgb(0,0,255)" d="M 383.75 0 L 383.75 256 384.25 256 384.25 0 Z "/>
+<path id="p16" fill="rgb(0,0,255)" d="M 256 63.75 L 384 63.75 384 64.25 256 64.25 Z "/>
+<path id="p17" fill="rgb(0,0,255)" d="M 319.75 0 L 319.75 128 320.25 128 320.25 0 Z "/>
+<path id="p18" fill="rgb(0,0,255)" d="M 384 191.75 L 512 191.75 512 192.25 384 192.25 Z "/>
+<path id="p19" fill="rgb(0,0,255)" d="M 447.75 128 L 447.75 256 448.25 256 448.25 128 Z "/>
+<path id="p20" fill="rgb(0,0,255)" d="M 0 383.75 L 256 383.75 256 384.25 0 384.25 Z "/>
+<path id="p21" fill="rgb(0,0,255)" d="M 127.75 256 L 127.75 512 128.25 512 128.25 256 Z "/>
+<path id="p22" fill="rgb(0,0,255)" d="M 0 319.75 L 128 319.75 128 320.25 0 320.25 Z "/>
+<path id="p23" fill="rgb(0,0,255)" d="M 63.75 256 L 63.75 384 64.25 384 64.25 256 Z "/>
+<path id="p24" fill="rgb(0,0,255)" d="M 128 447.75 L 256 447.75 256 448.25 128 448.25 Z "/>
+<path id="p25" fill="rgb(0,0,255)" d="M 191.75 384 L 191.75 512 192.25 512 192.25 384 Z "/>
+<path id="p26" fill="rgb(0,0,255)" d="M 256 383.75 L 512 383.75 512 384.25 256 384.25 Z "/>
+<path id="p27" fill="rgb(0,0,255)" d="M 383.75 256 L 383.75 512 384.25 512 384.25 256 Z "/>
+<path id="p28" fill="rgb(0,0,255)" d="M 384 319.75 L 512 319.75 512 320.25 384 320.25 Z "/>
+<path id="p29" fill="rgb(0,0,255)" d="M 447.75 256 L 447.75 384 448.25 384 448.25 256 Z "/>
+<path id="p30" fill="rgb(0,0,255)" d="M 256 447.75 L 384 447.75 384 448.25 256 448.25 Z "/>
+<path id="p31" fill="rgb(0,0,255)" d="M 319.75 384 L 319.75 512 320.25 512 320.25 384 Z "/>
+</g>
+</svg>

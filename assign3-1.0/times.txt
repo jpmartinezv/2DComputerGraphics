@@ -1,0 +1,24 @@
+hello-ttf.rvg
+ preprocess in 0.000s
+ rendering in 7.519s
+hello-type1.rvg
+ preprocess in 0.001s
+ rendering in 8.981s
+lineargradient.rvg
+ preprocess in 0.000s
+ rendering in 0.180s
+radialgradient.rvg
+ preprocess in 0.000s
+ rendering in 0.181s
+xformedlineargradient.rvg
+ preprocess in 0.000s
+ rendering in 0.127s
+xformedradialgradient.rvg
+ preprocess in 0.000s
+ rendering in 0.112s
+drops.rvg
+ preprocess in 0.009s
+ rendering in 1107.003s
+page
+ preprocess in 0.229s
+ rendering in --

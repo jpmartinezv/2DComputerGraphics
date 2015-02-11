@@ -1,0 +1,56 @@
+<?xml version="1.0" standalone="no"?>
+<svg
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 512 512">
+<defs>
+<linearGradient id="linear1" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="200" y2="200" spreadMethod="pad" gradientTransform="matrix(0.499995, 0.499995, -0.499995, 0.499995, 100, 0.000959005)">
+<stop offset="0" stop-color="rgb(255,0,0)" stop-opacity="1"/>
+<stop offset="1" stop-color="rgb(0,255,0)" stop-opacity="1"/>
+</linearGradient>
+</defs>
+<g transform="translate(0, 512) scale(1, -1)">
+<path id="p1" fill="url(#linear1)" d="M 256 0.0024550528 L 511.99744 255.9998950528 256 511.9973350528 0.0025599999999883 255.9998950528 256 0.0024550528 Z "/>
+<path id="p2" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 0 0 L 512 0 512 512 0 512 Z "/>
+<path id="p3" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 0 0 L 512 0 512 512 0 512 Z "/>
+<path id="p4" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 256 0 L 256 512 M 0 256 L 512 256 "/>
+<path id="p5" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 256 0 L 256 512 M 0 256 L 512 256 "/>
+<path id="p6" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 128 0 L 128 256 M 0 128 L 256 128 "/>
+<path id="p7" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 128 0 L 128 256 M 0 128 L 256 128 "/>
+<path id="p8" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 192 0 L 192 128 M 128 64 L 256 64 "/>
+<path id="p9" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 192 0 L 192 128 M 128 64 L 256 64 "/>
+<path id="p10" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 64 128 L 64 256 M 0 192 L 128 192 "/>
+<path id="p11" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 64 128 L 64 256 M 0 192 L 128 192 "/>
+<path id="p12" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 192 128 L 192 256 M 128 192 L 256 192 "/>
+<path id="p13" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 192 128 L 192 256 M 128 192 L 256 192 "/>
+<path id="p14" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 384 0 L 384 256 M 256 128 L 512 128 "/>
+<path id="p15" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 384 0 L 384 256 M 256 128 L 512 128 "/>
+<path id="p16" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 320 0 L 320 128 M 256 64 L 384 64 "/>
+<path id="p17" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 320 0 L 320 128 M 256 64 L 384 64 "/>
+<path id="p18" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 320 128 L 320 256 M 256 192 L 384 192 "/>
+<path id="p19" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 320 128 L 320 256 M 256 192 L 384 192 "/>
+<path id="p20" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 448 128 L 448 256 M 384 192 L 512 192 "/>
+<path id="p21" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 448 128 L 448 256 M 384 192 L 512 192 "/>
+<path id="p22" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 128 256 L 128 512 M 0 384 L 256 384 "/>
+<path id="p23" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 128 256 L 128 512 M 0 384 L 256 384 "/>
+<path id="p24" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 64 256 L 64 384 M 0 320 L 128 320 "/>
+<path id="p25" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 64 256 L 64 384 M 0 320 L 128 320 "/>
+<path id="p26" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 192 256 L 192 384 M 128 320 L 256 320 "/>
+<path id="p27" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 192 256 L 192 384 M 128 320 L 256 320 "/>
+<path id="p28" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 192 384 L 192 512 M 128 448 L 256 448 "/>
+<path id="p29" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 192 384 L 192 512 M 128 448 L 256 448 "/>
+<path id="p30" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 384 256 L 384 512 M 256 384 L 512 384 "/>
+<path id="p31" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 384 256 L 384 512 M 256 384 L 512 384 "/>
+<path id="p32" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 320 256 L 320 384 M 256 320 L 384 320 "/>
+<path id="p33" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 320 256 L 320 384 M 256 320 L 384 320 "/>
+<path id="p34" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 448 256 L 448 384 M 384 320 L 512 320 "/>
+<path id="p35" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 448 256 L 448 384 M 384 320 L 512 320 "/>
+<path id="p36" fill="none" stroke="rgb(255,255,255)" stroke-width="0.75" d="M 320 384 L 320 512 M 256 448 L 384 448 "/>
+<path id="p37" fill="none" stroke="rgb(0,0,0)" stroke-width="0.5" d="M 320 384 L 320 512 M 256 448 L 384 448 "/>
+</g>
+</svg>
