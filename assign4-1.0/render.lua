@@ -319,7 +319,7 @@ function newmonotonizer(forward)
             solve_extreme(x0, x1, x2, t)
             solve_extreme(y0, y1, y2, t)
             table.sort(t)
-            
+
             for i = 2, #t do 
                 forward:quadratic_segment(cut2s(t[i-1], t[i], x0, y0, x1, y1, x2, y2))
             end
@@ -387,9 +387,9 @@ function transformpath(oldpath, xf)
     newpath:open()
     oldpath:iterate(
     newxformer(xf * oldpath.xf,
-            newmonotonizer(
-                newcleaner(
-                    newpath))))
+    newmonotonizer(
+    newcleaner(
+    newpath))))
     newpath:close()
     return newpath
 end
@@ -630,13 +630,13 @@ function getcolor.radialgradient(paint, x0, y0)
     end
     local dp = sqrt(x0 * x0 + y0 * y0)
     local d = sqrt(x1 * x1 + y1 * y1)
-   
+
     local ramp = paint.data.ramp
     local n = #ramp
-    
+
     if dp > d then return unpack(paint.data.ramp[n]) end
     local p = dp/d
-    
+
     local r, g, b, a
     for i=1, n-2, 2 do
         if ramp[i] <= p and p < ramp[i+2] then
@@ -704,15 +704,18 @@ local function sample(quadtree, xmin, ymin, xmax, ymax, x, y)
                 lastx = shape.data[o+2]
                 lasty = shape.data[o+3]
             elseif s == "Q" then
-                eo = eo + checkinside.quadratic(lastx, lasty, shape.data[o+2], shape.data[o+3], shape.data[o+4], shape.data[o+5], x, y)
+                eo = eo + checkinside.quadratic(lastx, lasty, shape.data[o+2], shape.data[o+3],
+                shape.data[o+4], shape.data[o+5], x, y)
                 lastx = shape.data[o+4]
                 lasty = shape.data[o+5]
             elseif s == "A" then
-                eo = eo + checkinside.rational_quadratic(lastx, lasty, shape.data[o+2], shape.data[o+3], shape.data[o+4], shape.data[o+5], shape.data[o+6], x, y)
+                eo = eo + checkinside.rational_quadratic(lastx, lasty, shape.data[o+2], shape.data[o+3], 
+                shape.data[o+4], shape.data[o+5], shape.data[o+6], x, y)
                 lastx = shape.data[o+5]
                 lasty = shape.data[o+6]
             elseif s == "C" then
-                eo = eo + checkinside.cubic(lastx, lasty, shape.data[o+2], shape.data[o+3], shape.data[o+4], shape.data[o+5], shape.data[o+6], shape.data[o+7], x, y)
+                eo = eo + checkinside.cubic(lastx, lasty, shape.data[o+2], shape.data[o+3], 
+                shape.data[o+4], shape.data[o+5], shape.data[o+6], shape.data[o+7], x, y)
                 lastx = shape.data[o+6]
                 lasty = shape.data[o+7]
             end
@@ -944,8 +947,8 @@ function clippath(oldpath, a, type)
     local newpath = _M.path()
     newpath:open()
     oldpath:iterate(
-                newcleaner(
-                    newclipper(a, type, newpath)))
+    newcleaner(
+    newclipper(a, type, newpath)))
     newpath:close()
     return newpath
 end
@@ -995,7 +998,10 @@ local function checkstop(scene, xmin, ymin, xmax, ymax)
                 py = shape.data[o+2]
                 if not checkpoint(px, py, xmin, ymin, xmax, ymax) then return false end
             elseif s == "L" then
-                if not checkpoint(shape.data[o+2], shape.data[o+3], xmin, ymin, xmax, ymax) or not checkaxi(px, py, shape.data[o+2], shape.data[o+3]) then return false end
+                if not checkpoint(shape.data[o+2], shape.data[o+3], xmin, ymin, xmax, ymax) or 
+                    not checkaxi(px, py, shape.data[o+2], shape.data[o+3]) then
+                    return false
+                end
                 px = shape.data[o+2]
                 py = shape.data[o+3]
             elseif s == "Q" or s == "A" or s == "C" then
