@@ -1,0 +1,89 @@
+2D Computer Graphics
+2015.0
+
+Fifth assignment: Implicit tests for intersections
+-----------------------------------
+
+During the course of assignment 5, we will forget the
+quadtree we used in assignment 4, and go back to our
+implementation of assignment 3.
+
+This assignment is individual.
+
+The idea is to completely eliminate the computation of
+intersections.
+
+For that, you will need to monotonize all input segments.
+Cubics must also be split at their inflections and at the
+double-point, if any. Start by making sure that your code
+is robust at performing these tasks.
+
+We are providing a variety of new simple input samples to help you
+test some of the strange cases that can appear.
+
+    quad1.rvg
+    quad2.rvg
+    quad3.rvg
+    arc1.rvg
+    arc2.rvg
+    arc3.rvg
+    parabola1.rvg
+    parabola2.rvg
+    parabola3.rvg
+    parabola4.rvg
+    parabola5.rvg
+    cubic1.rvg
+    cubic2.rvg
+    cubic3.rvg
+    cubic4.rvg
+    cubic5.rvg
+    cubic6.rvg
+    cubic7.rvg
+    cubic8.rvg
+    ampersand.rvg
+
+Take a look at the file
+
+    ampersand-abstract.svg
+
+It shows the splitting of the file ampersand.rvg into
+monotonic segments with no inflections or double-points. You
+can also see the bounding triangles of each cubic segment.
+
+Once your segments have been properly split at the
+appropriate points, you will use implicit tests to detect
+the intersections without ever computing them.
+
+Remember that, for quadratics and rational quadratics,
+before using the implicit form, you must test against the
+bounding box and against the line that connects the segment
+endpoints.
+
+For cubics, you must, in addition, test against the two tangents at
+the endpoints, whicih form the bounding triangles.
+
+Finally, for each of these tests, you must be careful to
+properly choose the sign of the implicit function so that
+you know exactly when a point is to the left or to the right
+of the curve.
+
+The details are in the Mathematica files that we provide.
+
+Once you succeeded in rendering the simple input samples,
+you can move on to the more complicated ones.
+
+    hello-ttf.rvg
+    hello-type1.rvg
+
+We also providing new complex input files for you to test
+your renderer.
+
+    embrace.rvg
+    eyes.rvg
+    penguin.rvg
+    reschart.rvg
+
+It is important to get this assignment right, because we
+will need these implicit tests for the final assignment.
+
+Good luck!

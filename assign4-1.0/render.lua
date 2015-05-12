@@ -313,7 +313,7 @@ function newmonotonizer(forward)
             function solve_extreme(b0, b1, b2, t)
                 if b0 + b2 == 2*b1 then return end
                 local t1 = (b0 - b1)/(b0 - 2*b1 + b2)
-                if 0 < t1 and t1 < 1 then table.insert(t, t1)  end
+                if 0 < t1 and t1 < 1 then t[#t + 1] = t1  end
             end
             local t = {0, 1}
             solve_extreme(x0, x1, x2, t)
@@ -335,8 +335,8 @@ function newmonotonizer(forward)
                 local n, r1, s1, r2, s2 = solve.quadratic.quadratic(a, b, c)
                 if n == 0 then return end
                 local t1, t2 = r1/s1, r2/s2
-                if 0 < t1 and t1 < 1 then table.insert(t, t1) end
-                if 0 < t2 and t2 < 1 then table.insert(t, t2) end
+                if 0 < t1 and t1 < 1 then t[#t + 1] = t1 end
+                if 0 < t2 and t2 < 1 then t[#t + 1] = t2 end
             end
 
             local t = {0, 1}
@@ -358,8 +358,8 @@ function newmonotonizer(forward)
                 local n, r1, s1, r2, s2 = solve.quadratic.quadratic(a, b, c)
                 if n == 0 then return end
                 local t1, t2 = r1/s1, r2/s2
-                if 0 < t1 and t1 < 1 then table.insert(t, t1) end
-                if 0 < t2 and t2 < 1 then table.insert(t, t2) end
+                if 0 < t1 and t1 < 1 then t[#t + 1] = t1 end
+                if 0 < t2 and t2 < 1 then t[#t + 1] = t2 end
             end
             local t = {0,1}
             solve_extreme(x0, x1, x2, x3, t)
@@ -396,10 +396,10 @@ end
 
 -- Prepare paint
 
-function angleuv(vx, vy, ux, uy)
+local function angleuv(vx, vy, ux, uy)
     if vx == ux and vy == uy then return 0 end
     local theta = math.atan((uy-vy)/(ux-vx))
-    if (ux-vx)<0 then
+    if (ux-vx) < 0 then
         return theta + math.pi
     end
     return theta
@@ -407,26 +407,27 @@ end
 
 local prepare = {}
 
-function prepare.solid(element, scene_xform)
+function prepare.solid(paint, xf)
 end
 
-function prepare.lineargradient(element, scene_xform)
-    local data = element.paint.data
+function prepare.lineargradient(paint, xf)
+    local data = paint.data
     local theta = angleuv(data.p1[1], data.p1[2], data.p2[1], data.p2[2])
     local c = math.cos(-theta)
     local s = math.sin(-theta)
-    local dx = sqrt( (data.p1[1] - data.p2[1])^2 + (data.p1[2] - data.p2[2])^2 )
+    local dx = sqrt((data.p1[1] - data.p2[1])*(data.p1[1] - data.p2[1]) +
+    (data.p1[2] - data.p2[2])*(data.p1[2] - data.p2[2]))
 
     local rl = _M.xform(c, -s, 0, s, c, 0, 0, 0, 1)
     local tl = _M.xform(1, 0, -data.p1[1], 0, 1, -data.p1[2], 0, 0, 1)
     local sl = _M.xform(1/dx, 0, 0, 0, 1, 0, 0, 0, 1)
 
-    element.paint.T = sl* rl* tl * (scene_xform*element.paint.xf):inverse()
+    paint.T = sl* rl* tl * (xf*paint.xf):inverse()
 
 end
 
-function prepare.radialgradient(element, scene_xform)
-    local data = element.paint.data
+function prepare.radialgradient(paint, xf)
+    local data = paint.data
     local theta = angleuv(data.focus[1], data.focus[2], data.center[1], data.center[2])
     local c = math.cos(-theta)
     local s = math.sin(-theta)
@@ -439,7 +440,7 @@ function prepare.radialgradient(element, scene_xform)
     data.cx, data.cy = m:apply(data.center[1], data.center[2])
     data.fx, data.fy = m:apply(data.focus[1], data.focus[2])
 
-    element.paint.T = m * (scene_xform*element.paint.xf):inverse()
+    paint.T = m * (xf*paint.xf):inverse()
 end
 
 -- prepare scene for sampling and return modified scene
@@ -447,7 +448,7 @@ local function preparescene(scene)
     -- implement
     -- (feel free to use the transformpath function above)
     for i, element in ipairs(scene.elements) do
-        prepare[element.paint.type](element, scene.xf) 
+        prepare[element.paint.type](element.paint, scene.xf) 
         element.shape = transformpath(element.shape, scene.xf)
     end
     scene.xf = _M.identity()
@@ -557,14 +558,14 @@ function checkinside.cubic(x0, y0, x1, y1, x2, y2, x3, y3, x, y)
 end
 
 function checkinside.rational_quadratic(x0, y0, x1, y1, w1, x2, y2, x, y)
-    if min(y0, y2) <= y and y <= max(y0, y2) then
-        local t = bisectrationalquadratic(y0 - y, y1 - y*w1, w1, y2 - y)
-        local u = lerp2(x0, x1, x2, t, t)/lerp2(1, w1, 1, t, t) - x
-        if y0 < y2 then 
-            if 0 <= t and t < 1 and u > 0 then return 1 end
-        elseif y0 > y2 then
-            if 0 < t and t <= 1 and  u > 0 then return -1 end
-        end
+    if y0 <= y2 and (y < y0 or y2 <= y) then return 0 end
+    if y0 >= y2 and (y >= y0 or y2 > y) then return 0 end
+    local t = bisectrationalquadratic(y0 - y, y1 - y*w1, w1, y2 - y)
+    local u = lerp2(x0, x1, x2, t, t)/lerp2(1, w1, 1, t, t) - x
+    if y0 < y2 then 
+        if 0 <= t and t < 1 and u > 0 then return 1 end
+    elseif y0 > y2 then
+        if 0 < t and t <= 1 and  u > 0 then return -1 end
     end
     return 0
 end
@@ -612,6 +613,9 @@ end
 
 function getcolor.radialgradient(paint, x0, y0)
     local data = paint.data
+    local ramp = paint.data.ramp
+    local n = #ramp
+
     x0, y0 = paint.T:apply(x0, y0)
 
     local a = (1.0 + (x0/y0)^2)
@@ -630,9 +634,6 @@ function getcolor.radialgradient(paint, x0, y0)
     end
     local dp = sqrt(x0 * x0 + y0 * y0)
     local d = sqrt(x1 * x1 + y1 * y1)
-
-    local ramp = paint.data.ramp
-    local n = #ramp
 
     if dp > d then return unpack(paint.data.ramp[n]) end
     local p = dp/d
@@ -682,45 +683,38 @@ local function sample(quadtree, xmin, ymin, xmax, ymax, x, y)
     local scene = getleaf(quadtree, xmin, ymin, xmax, ymax, x, y)
 
     for i,element in ipairs(scene.elements) do
-        local shape = element.shape
-        local lastx, lasty
-        local last_beginx, last_beginy
-        local eo = 0
-        local n = #shape.instructions
-        for j=1,n do
-            local o = shape.offsets[j]
-            local s = rvgcommand[shape.instructions[j]]
+        local data = element.shape.data
+        local px, py
+        local fx, fy
+        local ni = 0
+        local n = #element.shape.instructions
+        for j=1, n do
+            local o = element.shape.offsets[j]
+            local s = rvgcommand[element.shape.instructions[j]]
             if s == "M" then
-                lastx = shape.data[o+1]
-                lasty = shape.data[o+2]
-                last_beginx = lastx
-                last_beginy = lasty 
+                px, py = data[o+1], data[o+2]
+                fx, fy = px, py
             elseif s == "Z" then
-                eo = eo + checkinside.linear(lastx, lasty, last_beginx, last_beginy, x, y)
-                lastx = last_beginx
-                lasty = last_beginy
+                ni = ni + checkinside.linear(px, py, fx, fy, x, y)
+                fx, fy = px, py
             elseif s == "L" then
-                eo = eo + checkinside.linear(lastx, lasty, shape.data[o+2], shape.data[o+3], x, y)
-                lastx = shape.data[o+2]
-                lasty = shape.data[o+3]
+                ni = ni + checkinside.linear(px, py, data[o+2], data[o+3], x, y)
+                px, py = data[o+2], data[o+3]
             elseif s == "Q" then
-                eo = eo + checkinside.quadratic(lastx, lasty, shape.data[o+2], shape.data[o+3],
-                shape.data[o+4], shape.data[o+5], x, y)
-                lastx = shape.data[o+4]
-                lasty = shape.data[o+5]
+                ni = ni + checkinside.quadratic(px, py, data[o+2], data[o+3],
+                data[o+4], data[o+5], x, y)
+                px, py = data[o+4], data[o+5]
             elseif s == "A" then
-                eo = eo + checkinside.rational_quadratic(lastx, lasty, shape.data[o+2], shape.data[o+3], 
-                shape.data[o+4], shape.data[o+5], shape.data[o+6], x, y)
-                lastx = shape.data[o+5]
-                lasty = shape.data[o+6]
+                ni = ni + checkinside.rational_quadratic(px, py, data[o+2], data[o+3], 
+                data[o+4], data[o+5], data[o+6], x, y)
+                px, py = data[o+5], data[o+6]
             elseif s == "C" then
-                eo = eo + checkinside.cubic(lastx, lasty, shape.data[o+2], shape.data[o+3], 
-                shape.data[o+4], shape.data[o+5], shape.data[o+6], shape.data[o+7], x, y)
-                lastx = shape.data[o+6]
-                lasty = shape.data[o+7]
+                ni = ni + checkinside.cubic(px, py, data[o+2], data[o+3], 
+                data[o+4], data[o+5], data[o+6], data[o+7], x, y)
+                px, py = data[o+6], data[o+7]
             end
         end
-        if (element.type == "fill" and eo ~= 0) or (element.type == "eofill" and eo % 2 ~= 0) then
+        if (element.type == "fill" and ni ~= 0) or (element.type == "eofill" and ni % 2 ~= 0) then
             r,g,b,a = getcolor[element.paint.type](element.paint, x, y)
             a = element.paint.opacity*a
             Cr = r*a + Cr*alpha*(1-a)
@@ -759,19 +753,17 @@ end
 
 local clipl = {}
 
-function clipl.right(x0, y0, x1, y1, a)
-    local x = a
-    local y = (y1-y0)*(a-x0)/(x1-x0) + y0
+function clipl.right(x0, y0, x1, y1, x)
+    local y = (y1-y0)*(x-x0)/(x1-x0) + y0
     return x, y
 end
 clipl.left = clipl.right
 
-function clipl.top(x0, y0, x1, y1, a)
-    local y = a
-    local x = (x1-x0)*(a-y0)/(y1-y0) + x0
+function clipl.top(x0, y0, x1, y1, y)
+    local x = (x1-x0)*(y-y0)/(y1-y0) + x0
     return x, y
 end
-clipl.botton = clipl.top
+clipl.bottom = clipl.top
 
 local clip2s = {}
 
@@ -783,7 +775,7 @@ clip2s.left = clip2s.right
 function clip2s.top(x0, y0, x1, y1, x2, y2, y)
     return bisectquadratic(y0 - y, y1 - y, y2 - y)
 end
-clip2s.botton = clip2s.top
+clip2s.bottom = clip2s.top
 
 local clipr2s = {}
 
@@ -795,7 +787,7 @@ clipr2s.left = clipr2s.right
 function clipr2s.top(  x0, y0, x1, y1, w1, x2, y2, y)
     return bisectrationalquadratic(y0 - y, y1 - y*w1, w1, y2 - y)
 end
-clipr2s.botton = clipr2s.top
+clipr2s.bottom = clipr2s.top
 
 local clip3s = {}
 
@@ -807,7 +799,7 @@ clip3s.left = clip3s.right
 function clip3s.top(x0, y0, x1, y1, x2, y2, x3, y3, y)
     return bisectcubic(y0 - y, y1 - y, y2 - y, y3 - y)
 end
-clip3s.botton = clip3s.top
+clip3s.bottom = clip3s.top
 
 local function newclipper(a, type, forward)
     local fx, fy -- first contour cursor
@@ -822,16 +814,18 @@ local function newclipper(a, type, forward)
     function clipper.right(x, y)
         return x < a
     end
-    function clipper.botton(x, y)
+    function clipper.bottom(x, y)
         return a <= y
     end
     function clipper.top(x, y)
         return y < a
     end
+    
+    local checkinside = clipper[type]
 
     function clipper:begin_closed_contour(len, x0, y0)
 
-        if clipper[type](x0, y0) then
+        if checkinside(x0, y0) then
             forward:begin_closed_contour(_, x0, y0)
             f = true
         end
@@ -851,23 +845,21 @@ local function newclipper(a, type, forward)
     end
     clipper.end_open_contour = clipper.end_closed_contour
     function clipper:linear_segment(x0, y0, x1, y1)
-        if clipper[type](x1, y1) then
-            if not clipper[type](sx, sy) then
+        if checkinside(x1, y1) then
+            if not checkinside(sx, sy) then
                 local ix, iy = clipl[type](sx, sy, x1, y1, a)
-                if lix == nil or liy == nil then
+                if not lix or not liy then
                     forward:begin_closed_contour(_, ix, iy)
                     f = true
                 else
                     forward:linear_segment(lix, liy, ix, iy)
+                    sx, sy = ix, iy
                 end
-                forward:linear_segment(ix, iy, x1, y1)
-            else
-                forward:linear_segment(sx, sy, x1, y1)
             end
-        elseif clipper[type](sx, sy) then
-            local ix, iy = clipl[type](sx, sy, x1, y1, a)
-            forward:linear_segment(sx, sy, ix, iy)
-            lix, liy = ix, iy
+            forward:linear_segment(sx, sy, x1, y1)
+        elseif checkinside(sx, sy) then
+            lix, liy = clipl[type](sx, sy, x1, y1, a)
+            forward:linear_segment(sx, sy, lix, liy)
         end
         sx, sy = x1, y1
     end
@@ -918,24 +910,24 @@ local function newclipper(a, type, forward)
         sx, sy = x2, y2
     end
     function clipper:cubic_segment(x0, y0, x1, y1, x2, y2, x3, y3)
-        if clipper[type](x3, y3) then
-            if not clipper[type](sx, sy) then
+        if checkinside(x3, y3) then
+            if not checkinside(sx, sy) then
                 local t = clip3s[type](sx, sy, x1, y1, x2, y2, x3, y3, a)
-                local ix, iy = lerp3(sx, x1, x2, x3, t, t), lerp3(sy, y1, y2, y3, t, t)
+                local ix, iy, u1, v1, u2, v2, u3, v3 = cut3s(t, 1, sx, sy, x1, y1, x2, y2, x3, y3)
                 if lix == nil or liy == nil then
                     forward:begin_closed_contour(_, ix, iy)
                     f = true
                 else
                     forward:linear_segment(lix, liy, ix, iy)
                 end
-                forward:cubic_segment(cut3s(t, 1, sx, sy, x1, y1, x2, y2, x3, y3))
+                forward:cubic_segment(ix, iy, u1, v1, u2, v2, u3, v3)
             else
                 forward:cubic_segment(sx, sy, x1, y1, x2, y2, x3, y3)
             end
-        elseif clipper[type](sx, sy) then
+        elseif checkinside(sx, sy) then
             local t = clip3s[type](sx, sy, x1, y1, x2, y2, x3, y3, a)
-            local ix, iy = lerp3(sx, x1, x2, x3, t, t), lerp3(sy, y1, y2, y3, t, t)
-            forward:cubic_segment(cut3s(0, t, sx, sy, x1, y1, x2, y2, x3, y3))
+            local u0, u1, u1, v1, u2, v2, ix, iy = cut3s(0, t, sx, sy, x1, y1, x2, y2, x3, y3)
+            forward:cubic_segment(u0, v0, u1, v1, u2, v2, ix, iy)
             lix, liy = ix, iy
         end
         sx, sy = x3, y3
@@ -946,33 +938,88 @@ end
 function clippath(oldpath, a, type)
     local newpath = _M.path()
     newpath:open()
-    oldpath:iterate(
-    newcleaner(
-    newclipper(a, type, newpath)))
+    oldpath:iterate(newclipper(a, type, newpath))
     newpath:close()
     return newpath
 end
 
+local clipcommand = {
+    T = "top",
+    B = "bottom",
+    R = "right",
+    L = "left",
+}
+
 -- clip scene against bounding-box and return a quadtree leaf
-local function scenetoleaf(scene, xmin, ymin, xmax, ymax)
+local function scenetoleaf(scene, xmin, ymin, xmax, ymax, c1, c2)
     -- implement
-    local new_path = nil
-    local new_elements = {}
+    local newelements = {}
+    local elements
+
     for i,element in ipairs(scene.elements) do
-        local shape = element.shape
-        new_path = clippath(element.shape, xmax, "right")
-        new_path = clippath(new_path, ymax, "top")
-        new_path = clippath(new_path, xmin, "left")
-        new_path = clippath(new_path, ymin, "botton")
-        if #new_path.instructions > 2 then
-            table.insert(new_elements, _M[element.type](new_path, element.paint))
+        newelements[#newelements + 1] = {element.shape, i}
+    end
+    
+    if not c2 or c2 == 'r' then
+        elements = newelements
+        newelements = {}
+        for _,element in ipairs(elements) do
+            local newshape = clippath(element[1], xmax, clipcommand.R)
+            if #newshape.instructions > 2 then
+                newelements[#newelements + 1] = {newshape, element[2]}
+                --newelements[#newelements + 1] = _M[element.type](newshape, element.paint)
+            end
         end
     end
 
-    return _M.scene(new_elements)
+    if not c1 or c1 == 't' then
+        elements = newelements
+        newelements = {}
+        for i,element in ipairs(elements) do
+            local newshape = clippath(element[1], ymax, clipcommand.T)
+            if #newshape.instructions > 2 then
+                --newelements[#newelements + 1] = _M[element.type](newshape, element.paint)
+                newelements[#newelements + 1] = {newshape, element[2]}
+            end
+        end
+    end
+
+    if not c2 or c2 == 'l' then
+        elements = newelements
+        newelements = {}
+        for i,element in ipairs(elements) do
+            local newshape = clippath(element[1], xmin, clipcommand.L)
+            if #newshape.instructions > 2 then
+                --newelements[#newelements + 1] = _M[element.type](newshape, element.paint)
+                newelements[#newelements + 1] = {newshape, element[2]}
+            end
+        end
+    end
+
+    if not c1 or c1 == 'b' then
+        elements = newelements
+        newelements = {}
+        for i,element in ipairs(elements) do
+            local newshape = clippath(element[1], ymin, clipcommand.B)
+            if #newshape.instructions > 2 then
+                --newelements[#newelements + 1] = _M[element.type](newshape, element.paint)
+                newelements[#newelements + 1] = {newshape, element[2]}
+            end
+        end
+    end
+
+    elements = scene.elements
+    local copied_elements = {}
+
+    for i,element in ipairs(newelements) do
+        local obj = elements[element[2]]
+        copied_elements[i] = _M[obj.type](element[1], obj.paint)
+    end
+
+    return _M.scene(copied_elements)
 end
 
-local function checkpoint(x, y, xmin, ymin, xmax, ymax)
+local function checkbound(x, y, xmin, ymin, xmax, ymax)
     if xmin <= x and x <= xmax and ( abs(y-ymin) < TOL or abs(y - ymax) < TOL ) then
         return true
     elseif ymin <= y and y <= ymax and ( abs(x-xmin) < TOL or abs(x - xmax) < TOL ) then
@@ -996,9 +1043,9 @@ local function checkstop(scene, xmin, ymin, xmax, ymax)
             if s == "M" then
                 px = shape.data[o+1]
                 py = shape.data[o+2]
-                if not checkpoint(px, py, xmin, ymin, xmax, ymax) then return false end
+                if not checkbound(px, py, xmin, ymin, xmax, ymax) then return false end
             elseif s == "L" then
-                if not checkpoint(shape.data[o+2], shape.data[o+3], xmin, ymin, xmax, ymax) or 
+                if not checkbound(shape.data[o+2], shape.data[o+3], xmin, ymin, xmax, ymax) or 
                     not checkaxi(px, py, shape.data[o+2], shape.data[o+3]) then
                     return false
                 end
@@ -1014,18 +1061,16 @@ end
 
 -- recursively subdivides leaf to create the quadtree
 function subdividescene(leaf, xmin, ymin, xmax, ymax, maxdepth, depth)
-    -- implement
     depth = depth or 1
     if depth >= maxdepth or checkstop(leaf, xmin, ymin, xmax, ymax) then  return leaf end
-    local xm = 0.5*(xmax + xmin)
-    local ym = 0.5*(ymax + ymin)
+    local xm = 0.5*(xmin + xmax)
+    local ym = 0.5*(ymin + ymax)
 
-    leaf.children = {
-        subdividescene(scenetoleaf(leaf, xmin, ymin, xm, ym), xmin, ymin, xm, ym, maxdepth, depth + 1), --bl 
-        subdividescene(scenetoleaf(leaf, xm, ymin, xmax, ym), xm, ymin, xmax, ym, maxdepth, depth + 1), --br
-        subdividescene(scenetoleaf(leaf, xmin, ym, xm, ymax), xmin, ym, xm, ymax, maxdepth, depth + 1), --tl
-        subdividescene(scenetoleaf(leaf, xm, ym, xmax, ymax), xm, ym, xmax, ymax, maxdepth, depth + 1), --tr
-    }
+    leaf.children = {true, true, true, true}
+    leaf.children[1] = subdividescene(scenetoleaf(leaf, xmin, ymin, xm, ym, 't', 'r'), xmin, ymin, xm, ym, maxdepth, depth + 1) --bl 
+    leaf.children[2] = subdividescene(scenetoleaf(leaf, xm, ymin, xmax, ym, 't', 'l'), xm, ymin, xmax, ym, maxdepth, depth + 1) --br
+    leaf.children[3] = subdividescene(scenetoleaf(leaf, xmin, ym, xm, ymax, 'b', 'r'), xmin, ym, xm, ymax, maxdepth, depth + 1) --tl
+    leaf.children[4] = subdividescene(scenetoleaf(leaf, xm, ym, xmax, ymax, 'b', 'l'), xm, ym, xmax, ymax, maxdepth, depth + 1) --tr
     return leaf
 end
 
@@ -1080,12 +1125,11 @@ end
 -- append lines marking the tree bounding box to the scene
 local function appendbox(xmin, ymin, xmax, ymax, scene)
     -- implement
-    table.insert(scene.elements, newstroke(xmin, ymin, xmax, ymin, 'h', 0.5))
-    table.insert(scene.elements, newstroke(xmin, ymax, xmax, ymax, 'h', 0.5))
-    table.insert(scene.elements, newstroke(xmin, ymin, xmin, ymax, 'v', 0.5))
-    table.insert(scene.elements, newstroke(xmax, ymin, xmax, ymax, 'v', 0.5))
-
-    return scene
+    local elements = scene.elements
+    elements[#elements + 1] = newstroke(xmin, ymin, xmax, ymin, 'h', 0.5)
+    elements[#elements + 1] = newstroke(xmin, ymax, xmax, ymax, 'h', 0.5)
+    elements[#elements + 1] = newstroke(xmin, ymin, xmin, ymax, 'v', 0.5)
+    elements[#elements + 1] = newstroke(xmax, ymin, xmax, ymax, 'v', 0.5)
 end
 
 -- recursively append the lines marking cell divisions to the scene
@@ -1096,8 +1140,9 @@ local function appendtree(quadtree, xmin, ymin, xmax, ymax, scene)
     local xm = 0.5*(xmax+xmin)
     local ym = 0.5*(ymax+ymin)
 
-    table.insert(scene.elements, newstroke(xmin, ym, xmax, ym, 'h', 0.5))
-    table.insert(scene.elements, newstroke(xm, ymin, xm, ymax, 'v', 0.5))
+    local elements = scene.elements
+    elements[#elements + 1] = newstroke(xmin, ym, xmax, ym, 'h', 0.5)
+    elements[#elements + 1] = newstroke(xm, ymin, xm, ymax, 'v', 0.5)
 
     appendtree(quadtree.children[1], xmin, ymin, xm, ym, scene)
     appendtree(quadtree.children[2], xm, ymin, xmax, ym, scene)
@@ -1162,6 +1207,7 @@ function _M.render(scene, viewport, output, arguments)
     -- build quadtree for scene
     local qxmin, qymin, qxmax, qymax =
     adjustviewport(vxmin, vymin, vxmax, vymax)
+    stderr("preparescene in %.3fs\n", time:elapsed())
     local quadtree = subdividescene(
     scenetoleaf(scene, vxmin, vymin, vxmax, vymax),
     qxmin, qymin, qxmax, qymax, maxdepth)
